@@ -1,0 +1,1 @@
+export 'package:lucielle/widget/text/luci_text.dart';
