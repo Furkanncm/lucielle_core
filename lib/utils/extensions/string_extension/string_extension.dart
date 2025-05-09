@@ -107,29 +107,25 @@ extension StringExtension on String {
   /// "Password123".isPassword(minSize: 8);  // Result: true
   /// "password".isPassword(minSize: 8);  // Result: false
   /// ```
-  bool isPassword({
-    int minSize = 6,
-    bool isRequiredAtLeast1Uppercase = true,
-    bool isRequiredAtLeast1Lowercase = true,
-  }) {
-    // Build the base pattern for password validation
-    String pattern = r'^(?=.*\d)'; // At least one digit
+bool isPassword({
+  int minSize = 6,
+  bool isRequiredAtLeast1Uppercase = true,
+  bool isRequiredAtLeast1Lowercase = true,
+}) {
+  String pattern = r'^(?=.*\d)'; // At least one digit
 
-    // Add checks for uppercase and lowercase letters based on the flags
-    if (isRequiredAtLeast1Uppercase) {
-      pattern += r'(?=.*[A-Z])'; // At least one uppercase letter
-    }
-    if (isRequiredAtLeast1Lowercase) {
-      pattern += r'(?=.*[a-z])'; // At least one lowercase letter
-    }
-
-    // Add the size check for the minimum password length
-    pattern += r'[A-Za-z\d]{$minSize,}$';
-
-    final regex = RegExp(pattern);
-    return regex.hasMatch(this);
+  if (isRequiredAtLeast1Uppercase) {
+    pattern += r'(?=.*[A-Z])';
+  }
+  if (isRequiredAtLeast1Lowercase) {
+    pattern += r'(?=.*[a-z])';
   }
 
+  pattern += '[A-Za-z\\d]{$minSize,}\$';
+
+  final regex = RegExp(pattern);
+  return regex.hasMatch(this);
+}
   /// Checks if the string is a valid phone number (basic format check).
   ///
   /// Validates that the string contains only digits, optionally starts with a `+`,
