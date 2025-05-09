@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/widget/sized_box/empty_box.dart';
+import 'package:lucielle/widget/widget.dart';
 
 /// `NaText` is a custom `StatelessWidget` that simplifies the usage of
 /// predefined text styles based on font sizes, mimicking Flutter's
@@ -381,7 +381,7 @@ final class LuciText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (data) {
-      null || '' => const EmptyBox(),
+      null || '' => emptyBox,
       _ => Text(
         data!,
         style: style,

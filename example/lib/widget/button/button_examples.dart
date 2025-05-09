@@ -32,13 +32,13 @@ final class ButtonExamples extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Text("Elevated Button "),
             ),
-            VerticalBox.medium(),
+            verticalBox12,
             LuciElevatedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.add),
               child: Text("Elevated Icon Button"),
             ),
-            VerticalBox.medium(),
+            verticalBox12,
             LuciOutlinedButton(
               onPressed: () {},
               borderColor: Colors.red,
@@ -47,7 +47,7 @@ final class ButtonExamples extends StatelessWidget {
               borderSide: BorderSide(width: 5, color: Colors.green),
               child: Text("Outlined Button"),
             ),
-            VerticalBox.medium(),
+            verticalBox12,
             LuciOutlinedButton.icon(
               onPressed: () {},
               icon: Icon(Icons.add),

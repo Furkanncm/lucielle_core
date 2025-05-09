@@ -1,80 +1,67 @@
-import 'package:flutter/material.dart';
+import 'package:lucielle/widget/sized_box/sized_box.dart';
 
-/// ------------------------------
-/// Vertical Spacing CustomBox
-/// ------------------------------
+/// An empty sized box with zero width and height.
+/// Useful as a placeholder with no visual size.
+const emptyBox = LuciSizedBox.shrink();
 
-/// A vertical empty box with no space (height 0).
-@immutable
-final class VerticalBox extends SizedBox {
-  const VerticalBox({super.key}) : super.shrink();
+/// Vertical spacing constants.
+/// These are commonly used in Column layouts
+/// to maintain consistent vertical gaps between widgets.
 
-  /// A very small vertical space (2 pixels).
-  const VerticalBox.tiny({super.key}) : super(height: 2);
+/// 4 pixels of vertical space.
+const verticalBox4 = LuciSizedBox(height: 4);
 
-  /// A small vertical space (4 pixels).
-  const VerticalBox.small({super.key}) : super(height: 4);
+/// 8 pixels of vertical space.
+const verticalBox8 = LuciSizedBox(height: 8);
 
-  /// A medium vertical space (8 pixels).
-  const VerticalBox.medium({super.key}) : super(height: 8);
+/// 12 pixels of vertical space.
+const verticalBox12 = LuciSizedBox(height: 12);
 
-  /// A regular vertical space (12 pixels).
-  const VerticalBox.regular({super.key}) : super(height: 12);
+/// 16 pixels of vertical space.
+const verticalBox16 = LuciSizedBox(height: 16);
 
-  /// A large vertical space (16 pixels).
-  const VerticalBox.large({super.key}) : super(height: 16);
+/// 20 pixels of vertical space.
+const verticalBox20 = LuciSizedBox(height: 20);
 
-  /// A very large vertical space (20 pixels).
-  const VerticalBox.extraLarge({super.key}) : super(height: 20);
+/// 24 pixels of vertical space.
+const verticalBox24 = LuciSizedBox(height: 24);
 
-  /// A huge vertical space (24 pixels).
-  const VerticalBox.giant({super.key}) : super(height: 24);
+/// 32 pixels of vertical space.
+const verticalBox32 = LuciSizedBox(height: 32);
 
-  /// An extra huge vertical space (32 pixels).
-  const VerticalBox.extraGiant({super.key}) : super(height: 32);
+/// 48 pixels of vertical space.
+const verticalBox48 = LuciSizedBox(height: 48);
 
-  /// An extremely large vertical space (48 pixels).
-  const VerticalBox.huge({super.key}) : super(height: 48);
+/// 64 pixels of vertical space.
+const verticalBox64 = LuciSizedBox(height: 64);
 
-  /// An enormous vertical space (64 pixels).
-  const VerticalBox.enormous({super.key}) : super(height: 64);
-}
+/// Horizontal spacing constants.
+/// These are useful in Row layouts
+/// to ensure consistent horizontal gaps between widgets.
 
-/// ------------------------------
-/// Horizontal Spacing CustomBox
-/// ------------------------------
+/// 4 pixels of horizontal space.
+const horizontalBox4 = LuciSizedBox(width: 4);
 
-/// A horizontal empty box with no space (width 0).
-class HorizontalBox extends SizedBox {
-  const HorizontalBox({super.key}) : super.shrink();
+/// 8 pixels of horizontal space.
+const horizontalBox8 = LuciSizedBox(width: 8);
 
-  /// A very small horizontal space (2 pixels).
-  const HorizontalBox.tiny({super.key}) : super(width: 2);
+/// 12 pixels of horizontal space.
+const horizontalBox12 = LuciSizedBox(width: 12);
 
-  /// A small horizontal space (4 pixels).
-  const HorizontalBox.small({super.key}) : super(width: 4);
+/// 16 pixels of horizontal space.
+const horizontalBox16 = LuciSizedBox(width: 16);
 
-  /// A medium horizontal space (8 pixels).
-  const HorizontalBox.medium({super.key}) : super(width: 8);
+/// 20 pixels of horizontal space.
+const horizontalBox20 = LuciSizedBox(width: 20);
 
-  /// A regular horizontal space (12 pixels).
-  const HorizontalBox.regular({super.key}) : super(width: 12);
+/// 24 pixels of horizontal space.
+const horizontalBox24 = LuciSizedBox(width: 24);
 
-  /// A large horizontal space (16 pixels).
-  const HorizontalBox.large({super.key}) : super(width: 16);
+/// 32 pixels of horizontal space.
+const horizontalBox32 = LuciSizedBox(width: 32);
 
-  /// A very large horizontal space (20 pixels).
-  const HorizontalBox.extraLarge({super.key}) : super(width: 20);
+/// 48 pixels of horizontal space.
+const horizontalBox48 = LuciSizedBox(width: 48);
 
-  /// A huge horizontal space (24 pixels).
-  const HorizontalBox.giant({super.key}) : super(width: 24);
-
-  /// An extra huge horizontal space (32 pixels).
-  const HorizontalBox.extraGiant({super.key}) : super(width: 32);
-
-  /// An extremely large horizontal space (48 pixels).
-  const HorizontalBox.huge({super.key}) : super(width: 48);
-
-  /// An enormous horizontal space (64 pixels).
-  const HorizontalBox.enormous({super.key}) : super(width: 64);
-}
+/// 64 pixels of horizontal space.
+const horizontalBox64 = LuciSizedBox(width: 64);
