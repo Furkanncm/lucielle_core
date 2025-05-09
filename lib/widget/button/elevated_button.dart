@@ -22,6 +22,7 @@ import 'package:lucielle/utils/decoration/padding/padding.dart';
 ///   child: Text("Add"),
 /// )
 /// ```
+@immutable
 final class LuciElevatedButton extends StatelessWidget {
   /// Creates a regular elevated button.
   const LuciElevatedButton({

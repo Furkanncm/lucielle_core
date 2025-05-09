@@ -24,8 +24,9 @@ import 'package:lucielle/utils/decoration/padding/padding.dart';
 ///   icon: Icon(Icons.add),
 ///   child: Text('Add'),
 /// )
-/// ```
-class LuciOutlinedButton extends StatelessWidget {
+/// ``
+@immutable
+final class LuciOutlinedButton extends StatelessWidget {
   /// Creates a custom outlined button with only a child widget.
   const LuciOutlinedButton({
     required this.child,
@@ -37,8 +38,8 @@ class LuciOutlinedButton extends StatelessWidget {
     this.borderSide,
     this.backgroundColor,
     super.key,
-  })  : isIcon = false,
-        icon = null;
+  }) : isIcon = false,
+       icon = null;
 
   /// Creates a custom outlined button with an icon and a label.
   const LuciOutlinedButton.icon({
@@ -99,15 +100,11 @@ class LuciOutlinedButton extends StatelessWidget {
 
     return isIcon
         ? OutlinedButton.icon(
-            onPressed: onPressed,
-            label: child,
-            icon: icon!,
-            style: outlinedButtonStyle,
-          )
-        : OutlinedButton(
-            onPressed: onPressed,
-            style: outlinedButtonStyle,
-            child: child,
-          );
+          onPressed: onPressed,
+          label: child,
+          icon: icon!,
+          style: outlinedButtonStyle,
+        )
+        : OutlinedButton(onPressed: onPressed, style: outlinedButtonStyle, child: child);
   }
 }
