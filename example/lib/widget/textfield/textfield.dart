@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lucielle/lucielle.dart';
-import 'package:lucielle/widget/textfield/phone_number_textfield.dart';
 
 void main() => runApp(const MyApp());
 
@@ -33,10 +32,10 @@ class Textfield extends StatelessWidget {
                 // maxLength: 2,
               ),
               verticalBox12,
-              LuciPasswordTextFormField(
-                // suffixIcon: Icons.e_mobiledata,
-                // reverseSuffix: Icons.ac_unit_sharp,
-              ),
+              // LuciPasswordTextFormField(
+              //   // suffixIcon: Icons.e_mobiledata,
+              //   // reverseSuffix: Icons.ac_unit_sharp,
+              // ),
               verticalBox12,
               LuciPhoneTextFormField(),
             ],
