@@ -3,7 +3,7 @@ import 'package:lucielle/utils/constants/string_constants.dart';
 
 /// A utility class containing static methods for common form validations.
 ///
-/// This class centralizes all input validations such as email and password, 
+/// This class centralizes all input validations such as email and password,
 /// allowing consistent and reusable logic throughout the application.
 final class Validators {
   /// Validates whether the given [value] is a properly formatted email address.
@@ -50,6 +50,11 @@ final class Validators {
     ))) {
       return StringConstants.invalidPassword.value;
     }
+    return null;
+  }
+
+  static String? phoneNumberValidator(String? value) {
+    if (value == null || !value.isPhoneNumber) return StringConstants.invalidPhoneNumber.value;
     return null;
   }
 }

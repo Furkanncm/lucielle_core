@@ -107,25 +107,26 @@ extension StringExtension on String {
   /// "Password123".isPassword(minSize: 8);  // Result: true
   /// "password".isPassword(minSize: 8);  // Result: false
   /// ```
-bool isPassword({
-  int minSize = 6,
-  bool isRequiredAtLeast1Uppercase = true,
-  bool isRequiredAtLeast1Lowercase = true,
-}) {
-  String pattern = r'^(?=.*\d)'; // At least one digit
+  bool isPassword({
+    int minSize = 6,
+    bool isRequiredAtLeast1Uppercase = true,
+    bool isRequiredAtLeast1Lowercase = true,
+  }) {
+    String pattern = r'^(?=.*\d)'; // At least one digit
 
-  if (isRequiredAtLeast1Uppercase) {
-    pattern += r'(?=.*[A-Z])';
+    if (isRequiredAtLeast1Uppercase) {
+      pattern += r'(?=.*[A-Z])';
+    }
+    if (isRequiredAtLeast1Lowercase) {
+      pattern += r'(?=.*[a-z])';
+    }
+
+    pattern += '[A-Za-z\\d]{$minSize,}\$';
+
+    final regex = RegExp(pattern);
+    return regex.hasMatch(this);
   }
-  if (isRequiredAtLeast1Lowercase) {
-    pattern += r'(?=.*[a-z])';
-  }
 
-  pattern += '[A-Za-z\\d]{$minSize,}\$';
-
-  final regex = RegExp(pattern);
-  return regex.hasMatch(this);
-}
   /// Checks if the string is a valid phone number (basic format check).
   ///
   /// Validates that the string contains only digits, optionally starts with a `+`,
@@ -137,7 +138,9 @@ bool isPassword({
   /// "12345".isPhoneNumber;  // Result: false
   /// ```
   bool get isPhoneNumber {
-    final regex = RegExp(r'^\+?[0-9]{10,15}$');
+    final regex = RegExp(
+      r'^(\+?\d{1,3}[-.\s()]*)?(\(?\d{3}\)?[-.\s]*)?\d{3}[-.\s]?\d{2,4}[-.\s]?\d{2,4}$',
+    );
     return regex.hasMatch(this);
   }
 

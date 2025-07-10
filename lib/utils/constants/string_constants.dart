@@ -15,13 +15,17 @@ enum StringConstants {
   invalidEmail("Email is not valid"),
 
   /// Error message shown when the entered password doesn't meet the criteria.
-  invalidPassword("Password is no valid"),
+  invalidPassword("Password is not valid"),
 
   /// The label used for email input fields.
   email("Email"),
 
   /// The label used for password input fields.
-  password("Password");
+  password("Password"),
+
+  phone("Phone number"),
+
+  invalidPhoneNumber("Phone Number is not valid");
 
   /// The actual string value associated with the constant.
   final String value;

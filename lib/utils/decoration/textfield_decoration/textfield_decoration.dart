@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A custom [InputDecoration] class that provides standardized 
+/// A custom [InputDecoration] class that provides standardized
 /// text field styles for email and password fields.
 class TextfieldDecoration extends InputDecoration {
   /// Creates an [InputDecoration] specifically designed for email input fields.
@@ -8,23 +8,19 @@ class TextfieldDecoration extends InputDecoration {
   /// Takes a [prefixIcon], [hintText], [labelText], and an optional [suffixIcon].
   ///
   /// Applies a consistent border radius on both left and right sides.
-  TextfieldDecoration.email(
-    this.prefixIcon,
-    this.hintText,
-    this.labelText,
-    this.suffixIcon,
-  ) : super(
-          prefixIcon: prefixIcon,
-          hintText: hintText,
-          labelText: labelText,
-          suffixIcon: suffixIcon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.horizontal(
-              right: Radius.circular(8),
-              left: Radius.circular(8),
-            ),
+  TextfieldDecoration.email(this.prefixIcon, this.hintText, this.labelText, this.suffixIcon)
+    : super(
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+        labelText: labelText,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.horizontal(
+            right: Radius.circular(8),
+            left: Radius.circular(8),
           ),
-        );
+        ),
+      );
 
   /// Creates an [InputDecoration] specifically designed for password input fields.
   ///
@@ -33,23 +29,33 @@ class TextfieldDecoration extends InputDecoration {
   /// which is typically used for toggling password visibility.
   ///
   /// Applies a consistent border radius on both left and right sides.
-  TextfieldDecoration.password(
-    this.prefixIcon,
-    this.hintText,
-    this.labelText,
-    this.suffixIcon,
-  ) : super(
-          prefixIcon: prefixIcon,
-          hintText: hintText,
-          labelText: labelText,
-          suffixIcon: suffixIcon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.horizontal(
-              right: Radius.circular(8),
-              left: Radius.circular(8),
-            ),
+  TextfieldDecoration.password(this.prefixIcon, this.hintText, this.labelText, this.suffixIcon)
+    : super(
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+        labelText: labelText,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.horizontal(
+            right: Radius.circular(8),
+            left: Radius.circular(8),
           ),
-        );
+        ),
+      );
+
+  TextfieldDecoration.phone(this.prefixIcon, this.hintText, this.labelText, this.suffixIcon)
+    : super(
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+        labelText: labelText,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.horizontal(
+            right: Radius.circular(8),
+            left: Radius.circular(8),
+          ),
+        ),
+      );
 
   /// The icon displayed before the editable part of the text field.
   final Widget? prefixIcon;
