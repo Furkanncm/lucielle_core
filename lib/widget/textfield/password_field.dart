@@ -40,6 +40,7 @@ class LuciPasswordTextFormField extends StatefulWidget {
     this.minSize = 6,
     this.isRequiredAtLeast1Lowercase = true,
     this.isRequiredAtLeast1Uppercase = true,
+    this.fillColor,
   });
 
   /// Controls the text being edited.
@@ -96,6 +97,9 @@ class LuciPasswordTextFormField extends StatefulWidget {
   /// Whether at least one uppercase character is required.
   final bool isRequiredAtLeast1Uppercase;
 
+  /// The background color of the text field.
+  /// Defaults to [Colors.white] if not provided.
+  final Color? fillColor;
   @override
   State<LuciPasswordTextFormField> createState() => _LuciPasswordTextFormFieldState();
 }
@@ -133,6 +137,9 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
                 : (widget.reverseSuffix ?? Icons.visibility_off_outlined),
           ),
         ),
+      ).copyWith(
+        filled: true,
+        fillColor: widget.fillColor ?? Colors.white,
       ),
       enabled: widget.enabled,
       focusNode: widget.focusNode,

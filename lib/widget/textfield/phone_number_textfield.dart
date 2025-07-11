@@ -22,6 +22,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.enabled,
     this.focusNode,
+    this.fillColor,
   });
 
   /// Controls the text being edited.
@@ -66,6 +67,10 @@ class LuciPhoneTextFormField extends StatelessWidget {
   /// An optional focus node to control the field's focus state.
   final FocusNode? focusNode;
 
+  /// The background color of the text field.
+  /// Defaults to [Colors.white] if not provided.
+  final Color? fillColor;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -82,7 +87,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
         hintText,
         labelText ?? StringConstants.phone.value,
         suffixIcon,
-      ),
+      ).copyWith(filled: true, fillColor: fillColor ?? Colors.white),
       enabled: enabled,
       focusNode: focusNode,
       maxLines: maxLength ?? 1,

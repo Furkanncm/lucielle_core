@@ -11,7 +11,7 @@ import 'package:lucielle/utils/validator/validator.dart';
 /// It uses [Validators.emailValidator] for validating the input value and
 /// [TextfieldDecoration.email] for consistent styling.
 ///
-/// Example usage:  
+/// Example usage:
 /// ```dart
 /// LuciEmailTextFormField(
 ///   controller: myController,
@@ -35,6 +35,7 @@ class LuciEmailTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.enabled,
     this.focusNode,
+    this.fillColor,
   });
 
   /// Controls the text being edited.
@@ -79,6 +80,10 @@ class LuciEmailTextFormField extends StatelessWidget {
   /// An optional focus node to control the field's focus state.
   final FocusNode? focusNode;
 
+  /// The background color of the text field.
+  /// Defaults to [Colors.white] if not provided.
+  final Color? fillColor;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -95,7 +100,7 @@ class LuciEmailTextFormField extends StatelessWidget {
         hintText,
         labelText ?? StringConstants.email.value,
         suffixIcon,
-      ),
+      ).copyWith(filled: true, fillColor: fillColor ?? Colors.white),
       enabled: enabled,
       focusNode: focusNode,
       maxLines: maxLength ?? 1,
