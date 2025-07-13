@@ -132,9 +132,9 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
         IconButton(
           onPressed: () => setState(() => obscureText = !obscureText),
           icon: Icon(
-            obscureText
-                ? (widget.suffixIcon ?? Icons.visibility_outlined)
-                : (widget.reverseSuffix ?? Icons.visibility_off_outlined),
+            obscureText 
+                ? (widget.suffixIcon ?? Icons.visibility_off_outlined)
+                : (widget.reverseSuffix ?? Icons.visibility_outlined),
           ),
         ),
       ).copyWith(
