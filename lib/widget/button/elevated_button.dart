@@ -51,7 +51,7 @@ final class LuciElevatedButton extends StatelessWidget {
   }) : isIcon = true;
 
   /// The callback triggered when the button is pressed.
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   /// Optional custom button style.
   final ButtonStyle? style;
