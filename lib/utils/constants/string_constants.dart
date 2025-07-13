@@ -25,7 +25,10 @@ enum StringConstants {
 
   phone("Phone number"),
 
-  invalidPhoneNumber("Phone Number is not valid");
+  invalidPhoneNumber("Phone Number is not valid"),
+  
+  passwordsDoNotMatch("Passwords do not match")
+  ;
 
   /// The actual string value associated with the constant.
   final String value;

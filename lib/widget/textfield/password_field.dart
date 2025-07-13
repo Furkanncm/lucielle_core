@@ -5,24 +5,29 @@ import 'package:lucielle/utils/validator/validator.dart';
 
 /// A customizable password [TextFormField] widget with built-in validation and visibility toggle.
 ///
-/// This widget is designed for password input and provides built-in support for:
-/// - Toggle visibility (show/hide password)
-/// - Password validation using [Validators.passwordValidator]
-/// - Custom prefix/suffix icons and text decorations
+/// This widget is designed for password input and provides:
+/// - Password visibility toggle (show/hide password)
+/// - Validation logic via [Validators.passwordValidator] or a custom validator
+/// - Optional confirm password comparison
+/// - Fully customizable UI (icons, labels, colors, etc.)
 ///
 /// Example usage:
 /// ```dart
 /// LuciPasswordTextFormField(
 ///   controller: passwordController,
+///   confirmController: confirmPasswordController, // optional
 ///   minSize: 8,
 ///   isRequiredAtLeast1Uppercase: true,
 ///   isRequiredAtLeast1Lowercase: true,
 /// )
 /// ```
 class LuciPasswordTextFormField extends StatefulWidget {
-  const LuciPasswordTextFormField({
+  /// Creates a [LuciPasswordTextFormField].
+  LuciPasswordTextFormField({
     super.key,
     this.controller,
+    this.confirmController,
+    this.validator,
     this.onChanged,
     this.textAlign,
     this.autovalidateMode,
@@ -43,96 +48,109 @@ class LuciPasswordTextFormField extends StatefulWidget {
     this.fillColor,
   });
 
-  /// Controls the text being edited.
+  /// Controller for the main password input.
   final TextEditingController? controller;
 
-  /// Called when the text is changed.
+  /// Optional controller to compare for "confirm password" validation.
+  final TextEditingController? confirmController;
+
+  /// Custom validator function. If null, [Validators.passwordValidator] is used.
+  final String? Function(String?)? validator;
+
+  /// Called when the text changes.
   final void Function(String)? onChanged;
 
-  /// Aligns the text within the field.
+  /// Aligns text within the field. Default is [TextAlign.left].
   final TextAlign? textAlign;
 
-  /// Controls validation behavior.
+  /// Auto validation mode for the form field.
   final AutovalidateMode? autovalidateMode;
 
-  /// Called when editing is complete.
+  /// Called when editing is complete (e.g. focus changes).
   final void Function()? onEditingComplete;
 
-  /// Called when the user submits the field.
+  /// Called when the user submits the field (e.g. presses "done" on keyboard).
   final void Function(String)? onFieldSubmitted;
 
-  /// Specifies the action button on the keyboard.
+  /// Sets the keyboard action button (e.g. done, next).
   final TextInputAction? textInputAction;
 
-  /// A custom widget displayed at the start of the field (e.g., icon).
+  /// Optional prefix icon (e.g. lock icon).
   final Widget? prefixIcon;
 
-  /// Placeholder text shown when the field is empty.
+  /// Hint text shown inside the field when it is empty.
   final String? hintText;
 
-  /// Label text shown above the field.
+  /// Label shown above the field.
   final String? labelText;
 
-  /// Maximum number of characters allowed.
+  /// Maximum number of characters allowed in the field.
   final int? maxLength;
 
-  /// Icon to use when password is hidden (default: [Icons.visibility_outlined]).
+  /// Icon shown when password is hidden (e.g. eye closed).
   final IconData? suffixIcon;
 
-  /// Icon to use when password is visible (default: [Icons.visibility_off_outlined]).
+  /// Icon shown when password is visible (e.g. eye open).
   final IconData? reverseSuffix;
 
-  /// Whether the field is enabled for input.
+  /// Whether the field is enabled. Default is true.
   final bool? enabled;
 
-  /// Controls the focus of this widget.
+  /// Focus node to manage focus manually.
   final FocusNode? focusNode;
 
-  /// Minimum required password length. Default is 6.
+  /// Minimum required length of the password. Default is 6.
   final int minSize;
 
-  /// Whether at least one lowercase character is required.
+  /// Whether the password must contain at least one lowercase letter.
   final bool isRequiredAtLeast1Lowercase;
 
-  /// Whether at least one uppercase character is required.
+  /// Whether the password must contain at least one uppercase letter.
   final bool isRequiredAtLeast1Uppercase;
 
-  /// The background color of the text field.
-  /// Defaults to [Colors.white] if not provided.
+  /// Background color of the field. Default is [Colors.white].
   final Color? fillColor;
+
   @override
   State<LuciPasswordTextFormField> createState() => _LuciPasswordTextFormFieldState();
 }
 
 class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
+  /// Tracks whether the password is hidden (obscured).
   bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      validator:
-          (value) => Validators.passwordValidator(
+      validator: (value) =>
+          widget.validator?.call(value) ??
+          Validators.passwordValidator(
             value,
             minSize: widget.minSize,
             isRequiredAtLeast1Lowercase: widget.isRequiredAtLeast1Lowercase,
             isRequiredAtLeast1Uppercase: widget.isRequiredAtLeast1Uppercase,
+            compareWith: widget.confirmController?.text,
           ),
       onChanged: widget.onChanged,
       textAlign: widget.textAlign ?? TextAlign.left,
       autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
       onEditingComplete: widget.onEditingComplete,
+      onFieldSubmitted: widget.onFieldSubmitted,
       textInputAction: widget.textInputAction,
       keyboardType: TextInputType.visiblePassword,
       obscureText: obscureText,
+      enabled: widget.enabled,
+      focusNode: widget.focusNode,
+      maxLength: widget.maxLength,
       decoration: TextfieldDecoration.password(
-        widget.prefixIcon ?? Icon(Icons.lock_open_outlined),
+        widget.prefixIcon ?? const Icon(Icons.lock_open_outlined),
         widget.hintText,
         widget.labelText ?? StringConstants.password.value,
         IconButton(
           onPressed: () => setState(() => obscureText = !obscureText),
           icon: Icon(
-            obscureText 
+            obscureText
                 ? (widget.suffixIcon ?? Icons.visibility_off_outlined)
                 : (widget.reverseSuffix ?? Icons.visibility_outlined),
           ),
@@ -141,9 +159,6 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
         filled: true,
         fillColor: widget.fillColor ?? Colors.white,
       ),
-      enabled: widget.enabled,
-      focusNode: widget.focusNode,
-      maxLength: widget.maxLength,
     );
   }
 }

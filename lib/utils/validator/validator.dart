@@ -34,24 +34,33 @@ final class Validators {
   /// - [value] does not match the password policy
   ///
   /// Returns `null` if the password is valid.
-  static String? passwordValidator(
-    String? value, {
-    int minSize = 6,
-    bool isRequiredAtLeast1Uppercase = true,
-    bool isRequiredAtLeast1Lowercase = true,
-  }) {
-    if (value == null || value.isEmpty) {
-      return StringConstants.passwordCantBeNull.value;
-    }
-    if (!(value.isPassword(
-      minSize: minSize,
-      isRequiredAtLeast1Lowercase: isRequiredAtLeast1Lowercase,
-      isRequiredAtLeast1Uppercase: isRequiredAtLeast1Uppercase,
-    ))) {
-      return StringConstants.invalidPassword.value;
-    }
-    return null;
+static String? passwordValidator(
+  String? value, {
+  int minSize = 6,
+  bool isRequiredAtLeast1Uppercase = true,
+  bool isRequiredAtLeast1Lowercase = true,
+  String? compareWith, // 💡 Diğer şifre ile karşılaştırma için
+}) {
+  if (value == null || value.isEmpty) {
+    return StringConstants.passwordCantBeNull.value;
   }
+
+  if (!(value.isPassword(
+    minSize: minSize,
+    isRequiredAtLeast1Lowercase: isRequiredAtLeast1Lowercase,
+    isRequiredAtLeast1Uppercase: isRequiredAtLeast1Uppercase,
+  ))) {
+    return StringConstants.invalidPassword.value;
+  }
+
+  // 💡 Eşleşme kontrolü
+  if (compareWith != null && value != compareWith) {
+    return StringConstants.passwordsDoNotMatch.value;
+  }
+
+  return null;
+}
+
 
   static String? phoneNumberValidator(String? value) {
     if (value == null || !value.isPhoneNumber) return StringConstants.invalidPhoneNumber.value;
