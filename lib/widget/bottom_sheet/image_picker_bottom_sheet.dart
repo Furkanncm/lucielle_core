@@ -10,7 +10,6 @@ final class ImagePickerBottomSheet {
 
   Future<void> showImagePickerBottomSheet({
     required BuildContext context,
-    required Widget Function(BuildContext) builder,
     Color? bottomSheetBackgroundColor,
     Color? textColor,
     Color? buttonBackgroundColor,
