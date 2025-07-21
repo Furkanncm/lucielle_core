@@ -65,7 +65,7 @@ class LuciThemeDark extends LuciTheme {
   /// - [HighlightColor]
   /// - [SplashColor]
   @override
-  ThemeData get theme => ThemeData.dark().copyWith(
+  ThemeData get luciThemeData => ThemeData.dark().copyWith(
     /// Base color palette.
     /// [colorScheme] defines the overall color properties for Dark Theme.
     colorScheme: _colorScheme,

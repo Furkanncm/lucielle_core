@@ -65,7 +65,7 @@ class LuciThemeLight extends LuciTheme {
   /// - [HighlightColor]
   /// - [SplashColor]
   @override
-  ThemeData get theme => ThemeData.light().copyWith(
+  ThemeData get luciThemeData => ThemeData.light().copyWith(
     /// Base color palette.
     /// [colorScheme] defines the overall color properties for Light Theme.
     colorScheme: _colorScheme,

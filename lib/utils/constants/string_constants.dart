@@ -27,7 +27,11 @@ enum StringConstants {
 
   invalidPhoneNumber("Phone Number is not valid"),
   
-  passwordsDoNotMatch("Passwords do not match")
+  passwordsDoNotMatch("Passwords do not match"),
+
+  fromCamera('From Camera'),
+
+  fromGallery('From Gallery'),
   ;
 
   /// The actual string value associated with the constant.

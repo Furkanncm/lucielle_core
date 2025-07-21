@@ -39,7 +39,7 @@ static String? passwordValidator(
   int minSize = 6,
   bool isRequiredAtLeast1Uppercase = true,
   bool isRequiredAtLeast1Lowercase = true,
-  String? compareWith, // 💡 Diğer şifre ile karşılaştırma için
+  String? compareWith, 
 }) {
   if (value == null || value.isEmpty) {
     return StringConstants.passwordCantBeNull.value;
@@ -53,7 +53,6 @@ static String? passwordValidator(
     return StringConstants.invalidPassword.value;
   }
 
-  // 💡 Eşleşme kontrolü
   if (compareWith != null && value != compareWith) {
     return StringConstants.passwordsDoNotMatch.value;
   }
