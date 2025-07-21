@@ -57,8 +57,6 @@ final class ImagePickerBottomSheet {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Divider(indent: sheetContext.width / 3, endIndent: sheetContext.width / 3),
-              verticalBox12,
               _BottomSheetButton(
                 imagePicker: _imagePicker,
                 label: StringConstants.fromCamera.value,

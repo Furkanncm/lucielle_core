@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,7 +18,6 @@ class LuciImagePicker implements ILuciImagePicker {
   final ImagePicker _picker;
 
   Future<bool> _request(Permission p) async {
-
     PermissionStatus status = await p.status;
     if (status.isGranted) return true;
 
@@ -25,21 +25,18 @@ class LuciImagePicker implements ILuciImagePicker {
     return status.isGranted;
   }
 
-
   Future<int> androidSdkInt() async {
     if (!Platform.isAndroid) return 0;
-    final ver = Platform.version; 
+    final ver = Platform.version;
     final match = RegExp(r'Android (\d+)').firstMatch(ver);
     if (match != null) {
       final major = int.tryParse(match.group(1)!);
-      if (major != null) {
-      }
+      if (major != null) {}
     }
     return 0;
   }
 
-  Future<bool> _checkPermissionForSource(ImageSource source,
-      {bool willPickVideo = false}) async {
+  Future<bool> _checkPermissionForSource(ImageSource source, {bool willPickVideo = false}) async {
     if (source == ImageSource.camera) {
       return _request(Permission.camera);
     }
@@ -73,7 +70,9 @@ class LuciImagePicker implements ILuciImagePicker {
     if (!allowed) return null;
 
     try {
-      return await _picker.pickImage(source: imageSource);
+      final pickedFile = await _picker.pickImage(source: imageSource);
+      if (pickedFile == null) return null;
+      return pickedFile;
     } catch (e, s) {
       debugPrint('pickImage error: $e\n$s');
       return null;
@@ -82,12 +81,13 @@ class LuciImagePicker implements ILuciImagePicker {
 
   @override
   Future<XFile?> pickVideo({required ImageSource imageSource}) async {
-    final allowed =
-        await _checkPermissionForSource(imageSource, willPickVideo: true);
+    final allowed = await _checkPermissionForSource(imageSource, willPickVideo: true);
     if (!allowed) return null;
 
     try {
-      return await _picker.pickVideo(source: imageSource);
+      final pickedFile = await _picker.pickVideo(source: imageSource);
+      if (pickedFile == null) return null;
+      return pickedFile;
     } catch (e, s) {
       debugPrint('pickVideo error: $e\n$s');
       return null;
@@ -96,8 +96,7 @@ class LuciImagePicker implements ILuciImagePicker {
 
   @override
   Future<List<XFile>> pickMultiImage() async {
-    final allowed =
-        await _checkPermissionForSource(ImageSource.gallery); 
+    final allowed = await _checkPermissionForSource(ImageSource.gallery);
     if (!allowed) return <XFile>[];
 
     try {
@@ -115,7 +114,9 @@ class LuciImagePicker implements ILuciImagePicker {
     if (!camOk && !galOk) return null;
 
     try {
-      return await _picker.pickMedia();
+      final pickedFile = await _picker.pickMedia();
+      if (pickedFile == null) return null;
+      return pickedFile;
     } catch (e, s) {
       debugPrint('pickMedia error: $e\n$s');
       return null;
@@ -125,8 +126,7 @@ class LuciImagePicker implements ILuciImagePicker {
   @override
   Future<List<XFile>> pickMultipleMedia() async {
     final camOk = await _checkPermissionForSource(ImageSource.camera);
-    final galOk =
-        await _checkPermissionForSource(ImageSource.gallery, willPickVideo: true);
+    final galOk = await _checkPermissionForSource(ImageSource.gallery, willPickVideo: true);
     if (!camOk && !galOk) return <XFile>[];
 
     try {
@@ -136,7 +136,6 @@ class LuciImagePicker implements ILuciImagePicker {
       return <XFile>[];
     }
   }
-
 
   Future<XFile?> pickImageFromCamera() => pickImage(imageSource: ImageSource.camera);
   Future<XFile?> pickImageFromGallery() => pickImage(imageSource: ImageSource.gallery);
