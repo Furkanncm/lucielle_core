@@ -61,6 +61,8 @@ final class ImagePickerBottomSheet {
                 label: StringConstants.fromCamera.value,
                 imageSource: ImageSource.camera,
                 icon: Icon(Icons.camera_alt_outlined),
+                textColor: textColor,
+                buttonBackgroundColor: buttonBackgroundColor,
               ),
               verticalBox12,
               _BottomSheetButton(
@@ -68,6 +70,8 @@ final class ImagePickerBottomSheet {
                 label: StringConstants.fromGallery.value,
                 imageSource: ImageSource.gallery,
                 icon: Icon(Icons.photo_library_outlined),
+                textColor: textColor,
+                buttonBackgroundColor: buttonBackgroundColor,
               ),
             ],
           ),
