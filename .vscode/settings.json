@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": [
+        "example/lib/common/image_picker/image_picker.dart"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
+}

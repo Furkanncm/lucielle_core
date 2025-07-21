@@ -6,9 +6,12 @@ import 'package:lucielle/utils/constants/string_constants.dart';
 
 @immutable
 final class ImagePickerBottomSheet {
-  final ILuciImagePicker _imagePicker = LuciImagePicker();
+  ImagePickerBottomSheet({ILuciImagePicker? imagePicker})
+    : _imagePicker = imagePicker ?? LuciImagePicker();
 
-  Future<void> showImagePickerBottomSheet({
+  final ILuciImagePicker _imagePicker;
+
+  Future<XFile?> showImagePickerBottomSheet({
     required BuildContext context,
     Color? bottomSheetBackgroundColor,
     Color? textColor,
@@ -29,8 +32,8 @@ final class ImagePickerBottomSheet {
     AnimationController? transitionAnimationController,
     Offset? anchorPoint,
     AnimationStyle? sheetAnimationStyle,
-  }) async {
-    await showModalBottomSheet(
+  }) {
+    return showModalBottomSheet<XFile?>(
       context: context,
       barrierLabel: barrierLabel,
       barrierColor: barrierColor ?? Colors.black.withValues(alpha: 0.5),
@@ -48,31 +51,34 @@ final class ImagePickerBottomSheet {
       transitionAnimationController: transitionAnimationController,
       anchorPoint: anchorPoint,
       backgroundColor: bottomSheetBackgroundColor ?? Colors.white,
-      builder: (context) {
+      builder: (sheetContext) {
         return Padding(
           padding: LuciPadding.horizontalMedium(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Divider(indent: context.width / 3, endIndent: context.width / 3),
+              Divider(indent: sheetContext.width / 3, endIndent: sheetContext.width / 3),
               verticalBox12,
               _BottomSheetButton(
                 imagePicker: _imagePicker,
                 label: StringConstants.fromCamera.value,
                 imageSource: ImageSource.camera,
-                icon: Icon(Icons.camera_alt_outlined),
+                icon: const Icon(Icons.camera_alt_outlined),
                 textColor: textColor,
                 buttonBackgroundColor: buttonBackgroundColor,
+                onPicked: (file) => Navigator.of(sheetContext).pop(file),
               ),
               verticalBox12,
               _BottomSheetButton(
                 imagePicker: _imagePicker,
                 label: StringConstants.fromGallery.value,
                 imageSource: ImageSource.gallery,
-                icon: Icon(Icons.photo_library_outlined),
+                icon: const Icon(Icons.photo_library_outlined),
                 textColor: textColor,
                 buttonBackgroundColor: buttonBackgroundColor,
+                onPicked: (file) => Navigator.of(sheetContext).pop(file),
               ),
+              verticalBox24,
             ],
           ),
         );
@@ -83,15 +89,15 @@ final class ImagePickerBottomSheet {
 
 @immutable
 final class _BottomSheetButton extends StatelessWidget {
-  _BottomSheetButton({
-    Key? key,
+  const _BottomSheetButton({
     required this.imagePicker,
-    this.textColor,
-    this.buttonBackgroundColor,
     required this.label,
     required this.imageSource,
     required this.icon,
-  }) : super(key: key);
+    required this.onPicked,
+    this.textColor,
+    this.buttonBackgroundColor,
+  });
 
   final ILuciImagePicker imagePicker;
   final Color? textColor;
@@ -100,36 +106,21 @@ final class _BottomSheetButton extends StatelessWidget {
   final ImageSource imageSource;
   final Icon icon;
 
+  final ValueChanged<XFile?> onPicked;
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(iconColor: textColor, backgroundColor: buttonBackgroundColor),
-      onPressed: () => imagePicker.pickImage(imageSource: imageSource),
+      onPressed: () async {
+        final file = await imagePicker.pickImage(imageSource: imageSource);
+        onPicked(file); 
+      },
       icon: icon,
-      label: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: LuciText.bodyMedium(label, textColor: textColor),
-        ),
+      label: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: LuciText.bodyMedium(label, textColor: textColor),
       ),
-    );
-  }
-
-  _BottomSheetButton copyWith({
-    ILuciImagePicker? imagePicker,
-    ValueGetter<Color?>? textColor,
-    ValueGetter<Color?>? buttonBackgroundColor,
-    String? label,
-    ImageSource? imageSource,
-  }) {
-    return _BottomSheetButton(
-      imagePicker: imagePicker ?? this.imagePicker,
-      textColor: textColor != null ? textColor() : this.textColor,
-      buttonBackgroundColor:
-          buttonBackgroundColor != null ? buttonBackgroundColor() : this.buttonBackgroundColor,
-      label: label ?? this.label,
-      imageSource: imageSource ?? this.imageSource,
-      icon: this.icon,
     );
   }
 }
