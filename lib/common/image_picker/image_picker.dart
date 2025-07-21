@@ -16,27 +16,55 @@ class LuciImagePicker implements ILuciImagePicker {
 
   final ImagePicker _picker;
 
-
   Future<bool> _request(Permission p) async {
-    final status = await p.status;
+
+    PermissionStatus status = await p.status;
     if (status.isGranted) return true;
-    final result = await p.request();
-    return result.isGranted;
+
+    status = await p.request();
+    return status.isGranted;
   }
 
-  Future<bool> _checkPermissionForSource(ImageSource source) async {
-    if (source == ImageSource.camera) {
-      return _request(Permission.camera);
-    } else {
-      // Galeri
-      if (Platform.isIOS) {
-        return _request(Permission.photos);
-      } else if (Platform.isAndroid) {
-        return _request(Permission.storage);
-      } else {
-        return true;
+
+  Future<int> androidSdkInt() async {
+    if (!Platform.isAndroid) return 0;
+    final ver = Platform.version; 
+    final match = RegExp(r'Android (\d+)').firstMatch(ver);
+    if (match != null) {
+      final major = int.tryParse(match.group(1)!);
+      if (major != null) {
       }
     }
+    return 0;
+  }
+
+  Future<bool> _checkPermissionForSource(ImageSource source,
+      {bool willPickVideo = false}) async {
+    if (source == ImageSource.camera) {
+      return _request(Permission.camera);
+    }
+
+    if (Platform.isIOS) {
+      return _request(Permission.photos);
+    }
+
+    if (Platform.isAndroid) {
+      bool photosOk = await _request(Permission.photos);
+
+      bool videosOk = true;
+      if (willPickVideo) {
+        videosOk = await _request(Permission.videos);
+      }
+
+      if (!photosOk || (willPickVideo && !videosOk)) {
+        final storageOk = await _request(Permission.storage);
+        return storageOk || photosOk || videosOk;
+      }
+
+      return photosOk && videosOk;
+    }
+
+    return true;
   }
 
   @override
@@ -54,7 +82,8 @@ class LuciImagePicker implements ILuciImagePicker {
 
   @override
   Future<XFile?> pickVideo({required ImageSource imageSource}) async {
-    final allowed = await _checkPermissionForSource(imageSource);
+    final allowed =
+        await _checkPermissionForSource(imageSource, willPickVideo: true);
     if (!allowed) return null;
 
     try {
@@ -67,7 +96,8 @@ class LuciImagePicker implements ILuciImagePicker {
 
   @override
   Future<List<XFile>> pickMultiImage() async {
-    final allowed = await _checkPermissionForSource(ImageSource.gallery);
+    final allowed =
+        await _checkPermissionForSource(ImageSource.gallery); 
     if (!allowed) return <XFile>[];
 
     try {
@@ -95,7 +125,8 @@ class LuciImagePicker implements ILuciImagePicker {
   @override
   Future<List<XFile>> pickMultipleMedia() async {
     final camOk = await _checkPermissionForSource(ImageSource.camera);
-    final galOk = await _checkPermissionForSource(ImageSource.gallery);
+    final galOk =
+        await _checkPermissionForSource(ImageSource.gallery, willPickVideo: true);
     if (!camOk && !galOk) return <XFile>[];
 
     try {
@@ -105,6 +136,7 @@ class LuciImagePicker implements ILuciImagePicker {
       return <XFile>[];
     }
   }
+
 
   Future<XFile?> pickImageFromCamera() => pickImage(imageSource: ImageSource.camera);
   Future<XFile?> pickImageFromGallery() => pickImage(imageSource: ImageSource.gallery);

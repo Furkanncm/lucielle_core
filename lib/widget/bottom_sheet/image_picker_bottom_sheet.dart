@@ -114,12 +114,12 @@ final class _BottomSheetButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(iconColor: textColor, backgroundColor: buttonBackgroundColor),
       onPressed: () async {
         final file = await imagePicker.pickImage(imageSource: imageSource);
-        onPicked(file); 
+        onPicked(file);
       },
       icon: icon,
       label: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
-        child: LuciText.bodyMedium(label, textColor: textColor),
+        child: Center(child: LuciText.bodyMedium(label, textColor: textColor)),
       ),
     );
   }
