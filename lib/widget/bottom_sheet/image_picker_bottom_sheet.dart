@@ -109,7 +109,7 @@ final class _BottomSheetButton extends StatelessWidget {
       label: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: LuciText.bodyMedium(label),
+          child: LuciText.bodyMedium(label, textColor: textColor),
         ),
       ),
     );
