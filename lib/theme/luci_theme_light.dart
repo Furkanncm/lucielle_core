@@ -12,7 +12,7 @@ class LuciThemeLight extends LuciTheme {
   final TextTheme? textTheme;
   final ElevatedButtonThemeData? elevatedButtonThemeData;
   final InputDecorationTheme? inputDecorationTheme;
-  final CardTheme? cardTheme;
+  final CardThemeData? cardTheme;
   final IconThemeData? iconThemeData;
   final FloatingActionButtonThemeData? floatingActionButtonThemeData;
   final BottomNavigationBarThemeData? bottomNavigationBarThemeData;
@@ -151,7 +151,7 @@ class LuciThemeLight extends LuciTheme {
     /// [Color: colorScheme.surface] for card background.
     cardTheme:
         cardTheme ??
-        CardTheme(
+        CardThemeData(
           color: _colorScheme.surface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 4,

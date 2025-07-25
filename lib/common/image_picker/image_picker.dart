@@ -25,16 +25,7 @@ class LuciImagePicker implements ILuciImagePicker {
     return status.isGranted;
   }
 
-  Future<int> androidSdkInt() async {
-    if (!Platform.isAndroid) return 0;
-    final ver = Platform.version;
-    final match = RegExp(r'Android (\d+)').firstMatch(ver);
-    if (match != null) {
-      final major = int.tryParse(match.group(1)!);
-      if (major != null) {}
-    }
-    return 0;
-  }
+
 
   Future<bool> _checkPermissionForSource(ImageSource source, {bool willPickVideo = false}) async {
     if (source == ImageSource.camera) {
