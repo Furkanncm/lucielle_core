@@ -6,3 +6,4 @@ export 'widget/textfield/phone_number_textfield.dart';
 export 'widget/sized_box/sized_box.dart';
 export 'widget/bottom_sheet/image_picker_bottom_sheet.dart';
 export 'common/index.dart';
+export 'utils/dialogs/luci_dialogs.dart';
