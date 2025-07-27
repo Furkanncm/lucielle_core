@@ -55,7 +55,6 @@ class PermissionManager {
     );
   }
 
-  /// Verilen izne göre JSON key prefix döner
   String _getPrefix(Permission permission) {
     if (permission == Permission.camera) return 'camera';
     if (permission == Permission.photos ||

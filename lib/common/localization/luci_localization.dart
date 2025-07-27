@@ -11,7 +11,7 @@ class CoreLocalizations {
     final localeKey = countryCode != null ? '$langCode-$countryCode' : langCode;
 
     final String jsonString = await rootBundle.loadString(
-      'assets/lang/$localeKey.json',
+      'assets/translations/$localeKey.json',
     );
 
     _localizedStrings.clear();
