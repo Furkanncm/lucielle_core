@@ -1,0 +1,22 @@
+{
+      "locationPermissionTitle": "Konum İzni Gerekli",
+  "locationPermissionDescription": "Haberleri konumunuza göre özelleştirmek için konum iznine ihtiyacımız var.",
+  "notificationPermissionTitle": "Bildirim İzni Gerekli",
+  "notificationPermissionDescription": "Önemli haberleri kaçırmamanız için bildirim göndermek istiyoruz.",
+  "cameraPermissionTitle": "Kamera İzni Gerekli",
+  "cameraPermissionDescription": "Fotoğraf çekebilmek için kamera erişimine ihtiyacımız var.",
+  "galleryPermissionTitle": "Galeri Erişimi Gerekli",
+  "galleryPermissionDescription": "Fotoğraf yüklemek için medya dosyalarınıza erişmemiz gerekiyor.",
+  "microphonePermissionTitle": "Mikrofon İzni Gerekli",
+  "microphonePermissionDescription": "Sesli komut veya kayıt için mikrofon izni gereklidir.",
+  "storagePermissionTitle": "Depolama İzni Gerekli",
+  "storagePermissionDescription": "Uygulamanın düzgün çalışması için dosya okuma/yazma iznine ihtiyacımız var.",
+  "permissionSettingsButton": "Ayarlar'a Git",
+  "permissionDeniedForever": "İzin kalıcı olarak reddedildi. Lütfen ayarlardan manuel olarak izin verin.",
+  "permissionDenied": "İzin reddedildi",
+  "permissionGranted": "İzin verildi",
+  "permissionRequest": "İzin İsteği",
+  "allow": "İzin Ver",
+  "deny": "Reddet",
+  "requiredPermission": "Bu özellik için izin gerekli"
+}

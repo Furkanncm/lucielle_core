@@ -1,5 +1,5 @@
-import 'package:lucielle/lucielle.dart';
-import 'package:lucielle/utils/constants/string_constants.dart';
+import '../../lucielle.dart';
+import '../constants/string_constants.dart';
 
 /// A utility class containing static methods for common form validations.
 ///

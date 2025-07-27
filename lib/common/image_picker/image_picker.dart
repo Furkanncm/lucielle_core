@@ -1,8 +1,7 @@
 import 'dart:io' show Platform;
-
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lucielle/common/permission_manager/permission_manager.dart';
+import '../permission_manager/permission_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 abstract class ILuciImagePicker {
@@ -14,34 +13,44 @@ abstract class ILuciImagePicker {
 }
 
 class LuciImagePicker implements ILuciImagePicker {
-  LuciImagePicker({ImagePicker? picker}) : _picker = picker ?? ImagePicker();
+  LuciImagePicker(
+      {this.locale = const Locale('en', 'US'),
+      required this.context,
+      ImagePicker? picker, 
+      PermissionManager? permissionManager,
+      })
+      : _picker = picker ?? ImagePicker(),
+      _permissionManager =permissionManager?? PermissionManager(context: context, locale: locale);
+    
 
-  final ImagePicker _picker ;
+  final ImagePicker _picker;
+  final BuildContext context;
+  final PermissionManager _permissionManager;
+  final Locale locale;
 
-  final PermissionManager _permissionManager= PermissionManager();
-
-
-
-  Future<bool> _checkPermissionForSource(ImageSource source,
-      {bool willPickVideo = false}) async {
+  Future<bool> _checkPermissionForSource(
+    ImageSource source, {
+    bool willPickVideo = false,
+  }) async {
     if (source == ImageSource.camera) {
       return _permissionManager.checkStatus(Permission.camera);
     }
 
     if (Platform.isIOS) {
-      return  _permissionManager.checkStatus(Permission.photos);
+      return _permissionManager.checkStatus(Permission.photos);
     }
 
     if (Platform.isAndroid) {
-      bool photosOk = await  _permissionManager.checkStatus(Permission.photos);
+      bool photosOk = await _permissionManager.checkStatus(Permission.photos);
 
       bool videosOk = true;
       if (willPickVideo) {
-        videosOk = await  _permissionManager.checkStatus(Permission.videos);
+        videosOk = await _permissionManager.checkStatus(Permission.videos);
       }
 
       if (!photosOk || (willPickVideo && !videosOk)) {
-        final storageOk = await  _permissionManager.checkStatus(Permission.storage);
+        final storageOk = await _permissionManager
+            .checkStatus(Permission.storage);
         return storageOk || photosOk || videosOk;
       }
 

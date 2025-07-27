@@ -1,4 +1,4 @@
-import 'package:lucielle/widget/sized_box/sized_box.dart';
+import 'sized_box.dart';
 
 /// An empty sized box with zero width and height.
 /// Useful as a placeholder with no visual size.

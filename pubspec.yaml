@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  app_settings: ^6.1.1
   flutter:
     sdk: flutter
 
@@ -20,3 +21,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
+
+  assets:
+    - assets/translations

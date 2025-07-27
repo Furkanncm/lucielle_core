@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/theme/luci_theme.dart';
+import 'luci_theme.dart';
 
 /// Represents the Dark Mode Theme for the application.
 /// Defines all visual aspects of the app in dark mode.

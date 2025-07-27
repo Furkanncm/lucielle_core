@@ -1,0 +1,22 @@
+{
+       "locationPermissionTitle": "Location Permission Required",
+  "locationPermissionDescription": "We need your location to personalize the news for you.",
+  "notificationPermissionTitle": "Notification Permission Required",
+  "notificationPermissionDescription": "We want to send you notifications so you don't miss important news.",
+  "cameraPermissionTitle": "Camera Permission Required",
+  "cameraPermissionDescription": "Camera access is needed to take photos.",
+  "galleryPermissionTitle": "Gallery Access Required",
+  "galleryPermissionDescription": "We need access to your media files to upload photos.",
+  "microphonePermissionTitle": "Microphone Permission Required",
+  "microphonePermissionDescription": "Microphone access is needed for voice commands or recordings.",
+  "storagePermissionTitle": "Storage Permission Required",
+  "storagePermissionDescription": "Read/write permission is needed for proper app functionality.",
+  "permissionSettingsButton": "Go to Settings",
+  "permissionDeniedForever": "Permission has been permanently denied. Please enable it manually from settings.",
+  "permissionDenied": "Permission denied",
+  "permissionGranted": "Permission granted",
+  "permissionRequest": "Permission Request",
+  "allow": "Allow",
+  "deny": "Deny",
+  "requiredPermission": "Permission is required for this feature"
+}

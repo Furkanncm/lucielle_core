@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/utils/decoration/padding/padding.dart';
+import '../../utils/decoration/padding/padding.dart';
 
 /// A custom elevated button widget providing consistent design across the app.
 ///

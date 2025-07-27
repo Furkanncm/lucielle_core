@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/lucielle.dart';
+import '../../lucielle.dart';
 
 abstract class LuciDialogs {
   static Future<T?> showDialog<T>({

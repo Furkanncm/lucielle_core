@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lucielle/lucielle.dart';
+import '../../lucielle.dart';
 
 @immutable
 final class LuciOutlinedButton extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/utils/constants/string_constants.dart';
-import 'package:lucielle/utils/decoration/textfield_decoration/textfield_decoration.dart';
-import 'package:lucielle/utils/validator/validator.dart';
+import '../../utils/constants/string_constants.dart';
+import '../../utils/decoration/textfield_decoration/textfield_decoration.dart';
+import '../../utils/validator/validator.dart';
 
 /// A reusable custom [TextFormField] widget specifically designed for email input.
 ///

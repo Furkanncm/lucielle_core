@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lucielle/common/image_picker/image_picker.dart';
-import 'package:lucielle/lucielle.dart';
-import 'package:lucielle/utils/constants/string_constants.dart';
+import '../../common/image_picker/image_picker.dart';
+import '../../lucielle.dart';
+import '../../utils/constants/string_constants.dart';
 
 @immutable
 final class ImagePickerBottomSheet {
-  ImagePickerBottomSheet({ILuciImagePicker? imagePicker})
-    : _imagePicker = imagePicker ?? LuciImagePicker();
+  ImagePickerBottomSheet({
+    required this.context,
+    ILuciImagePicker? imagePicker,
+  }) : _imagePicker = imagePicker ?? LuciImagePicker(context: context);
 
   final ILuciImagePicker _imagePicker;
+  final BuildContext context;
 
   Future<XFile?> showImagePickerBottomSheet({
     required BuildContext context,
@@ -38,7 +41,8 @@ final class ImagePickerBottomSheet {
       barrierLabel: barrierLabel,
       barrierColor: barrierColor ?? Colors.black.withValues(alpha: 0.5),
       elevation: elevation ?? 1,
-      shape: shape ?? RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: shape ??
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       clipBehavior: clipBehavior,
       constraints: constraints,
       isScrollControlled: isScrollControlled,
@@ -109,7 +113,8 @@ final class _BottomSheetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(iconColor: textColor, backgroundColor: buttonBackgroundColor),
+      style: ElevatedButton.styleFrom(
+          iconColor: textColor, backgroundColor: buttonBackgroundColor),
       onPressed: () async {
         final file = await imagePicker.pickImage(imageSource: imageSource);
         onPicked(file);

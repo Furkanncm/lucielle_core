@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucielle/widget/widget.dart';
+import '../widget.dart';
 
 /// `NaText` is a custom `StatelessWidget` that simplifies the usage of
 /// predefined text styles based on font sizes, mimicking Flutter's
