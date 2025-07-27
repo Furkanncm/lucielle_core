@@ -13,15 +13,14 @@ abstract class ILuciImagePicker {
 }
 
 class LuciImagePicker implements ILuciImagePicker {
-  LuciImagePicker(
-      {this.locale = const Locale('en', 'US'),
-      required this.context,
-      ImagePicker? picker, 
-      PermissionManager? permissionManager,
-      })
-      : _picker = picker ?? ImagePicker(),
-      _permissionManager =permissionManager?? PermissionManager(context: context, locale: locale);
-    
+  LuciImagePicker({
+    required this.locale,
+    required this.context,
+    ImagePicker? picker,
+    PermissionManager? permissionManager,
+  })  : _picker = picker ?? ImagePicker(),
+        _permissionManager = permissionManager ??
+            PermissionManager(context: context, locale: locale);
 
   final ImagePicker _picker;
   final BuildContext context;
@@ -49,8 +48,8 @@ class LuciImagePicker implements ILuciImagePicker {
       }
 
       if (!photosOk || (willPickVideo && !videosOk)) {
-        final storageOk = await _permissionManager
-            .checkStatus(Permission.storage);
+        final storageOk =
+            await _permissionManager.checkStatus(Permission.storage);
         return storageOk || photosOk || videosOk;
       }
 

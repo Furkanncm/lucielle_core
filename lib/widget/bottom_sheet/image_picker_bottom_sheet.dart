@@ -4,18 +4,14 @@ import '../../common/image_picker/image_picker.dart';
 import '../../lucielle.dart';
 import '../../utils/constants/string_constants.dart';
 
-@immutable
 final class ImagePickerBottomSheet {
-  ImagePickerBottomSheet({
-    required this.context,
-    ILuciImagePicker? imagePicker,
-  }) : _imagePicker = imagePicker ?? LuciImagePicker(context: context);
+ 
 
-  final ILuciImagePicker _imagePicker;
-  final BuildContext context;
+  ILuciImagePicker? imagePicker;
 
   Future<XFile?> showImagePickerBottomSheet({
     required BuildContext context,
+    required Locale locale,
     Color? bottomSheetBackgroundColor,
     Color? textColor,
     Color? buttonBackgroundColor,
@@ -36,6 +32,7 @@ final class ImagePickerBottomSheet {
     Offset? anchorPoint,
     AnimationStyle? sheetAnimationStyle,
   }) {
+    imagePicker = LuciImagePicker(context: context, locale: locale);
     return showModalBottomSheet<XFile?>(
       context: context,
       barrierLabel: barrierLabel,
@@ -62,7 +59,7 @@ final class ImagePickerBottomSheet {
             mainAxisSize: MainAxisSize.min,
             children: [
               _BottomSheetButton(
-                imagePicker: _imagePicker,
+                imagePicker: imagePicker,
                 label: StringConstants.fromCamera.value,
                 imageSource: ImageSource.camera,
                 icon: const Icon(Icons.camera_alt_outlined),
@@ -72,7 +69,7 @@ final class ImagePickerBottomSheet {
               ),
               verticalBox12,
               _BottomSheetButton(
-                imagePicker: _imagePicker,
+                imagePicker: imagePicker,
                 label: StringConstants.fromGallery.value,
                 imageSource: ImageSource.gallery,
                 icon: const Icon(Icons.photo_library_outlined),
@@ -101,7 +98,7 @@ final class _BottomSheetButton extends StatelessWidget {
     this.buttonBackgroundColor,
   });
 
-  final ILuciImagePicker imagePicker;
+  final ILuciImagePicker? imagePicker;
   final Color? textColor;
   final Color? buttonBackgroundColor;
   final String label;
@@ -116,7 +113,7 @@ final class _BottomSheetButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           iconColor: textColor, backgroundColor: buttonBackgroundColor),
       onPressed: () async {
-        final file = await imagePicker.pickImage(imageSource: imageSource);
+        final file = await imagePicker?.pickImage(imageSource: imageSource);
         onPicked(file);
       },
       icon: icon,
