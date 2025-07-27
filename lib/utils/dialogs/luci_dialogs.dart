@@ -45,7 +45,7 @@ abstract class LuciDialogs {
             ),
             child: Icon(
               Icons.question_mark_rounded,
-              color: primaryColor,
+              color: primaryColor??Colors.blue,
               size: 40,
             ),
           ),

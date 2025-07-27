@@ -15,24 +15,39 @@ class PermissionManager {
     await CoreLocalizations.load(locale);
     permissionStatus = await type.status;
 
-    if (permissionStatus.isGranted) return true;
+    switch (permissionStatus) {
+      case PermissionStatus.limited:
+      case PermissionStatus.provisional:
+      case PermissionStatus.granted:
+        return true;
+      case PermissionStatus.denied:
+        permissionStatus = await type.request();
+        if (permissionStatus == PermissionStatus.granted) {
+          return true;
+        } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
+          await _showDialog(type);
+          return false;
+        }
+        return false;
 
-    if (permissionStatus.isPermanentlyDenied) return false;
+      case PermissionStatus.permanentlyDenied:
+        await _showDialog(type);
+        return false;
 
-    permissionStatus = await type.request();
-
-    if (permissionStatus.isPermanentlyDenied) {
-      await _showPermissionDialog(
-        context: context,
-        title: CoreLocalizations.get('${_getPrefix(type)}PermissionTitle'),
-        content:
-            CoreLocalizations.get('${_getPrefix(type)}PermissionDescription'),
-        positiveButtonLabel: CoreLocalizations.get('permissionSettingsButton'),
-        negativeButtonLabel: CoreLocalizations.get('deny'),
-      );
+      case PermissionStatus.restricted:
+        return false;
     }
+  }
 
-    return permissionStatus.isGranted;
+  Future<void> _showDialog(Permission type) {
+    return _showPermissionDialog(
+      context: context,
+      title: CoreLocalizations.get('${_getPrefix(type)}PermissionTitle'),
+      content:
+          CoreLocalizations.get('${_getPrefix(type)}PermissionDescription'),
+      positiveButtonLabel: CoreLocalizations.get('permissionSettingsButton'),
+      negativeButtonLabel: CoreLocalizations.get('deny'),
+    );
   }
 
   Future<void> _showPermissionDialog({
