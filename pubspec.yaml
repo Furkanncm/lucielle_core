@@ -21,7 +21,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
-
   assets:
-    - assets/translations
-    - assets\translations
+    - assets/translations/tr-TR.json
+    - assets/translations/en-US.json
