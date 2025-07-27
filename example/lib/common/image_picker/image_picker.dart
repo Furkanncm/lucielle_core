@@ -13,7 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final ImagePickerBottomSheet _imagePickerBottomSheet = ImagePickerBottomSheet();
+  final ImagePickerBottomSheet _imagePickerBottomSheet =
+      ImagePickerBottomSheet();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,12 +45,14 @@ class _BottomSheetState extends State<_BottomSheet> {
         children: [
           GestureDetector(
             onTap: () async {
-              picked = await widget._imagePickerBottomSheet.showImagePickerBottomSheet(
-                context: context,
-                bottomSheetBackgroundColor: Colors.white,
-                textColor: Colors.grey,
-                buttonBackgroundColor: Colors.black,
-              );
+              picked = await widget._imagePickerBottomSheet
+                  .showImagePickerBottomSheet(
+                    context: context,
+                    locale: Locale('en', 'US'),
+                    bottomSheetBackgroundColor: Colors.white,
+                    textColor: Colors.grey,
+                    buttonBackgroundColor: Colors.black,
+                  );
             },
             child: LuciText.bodyMedium('asfafsafa', textColor: Colors.grey),
           ),

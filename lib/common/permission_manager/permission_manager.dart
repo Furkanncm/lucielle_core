@@ -64,7 +64,6 @@ class PermissionManager {
       positiveButtonLabel: positiveButtonLabel,
       negativeButtonLabel: negativeButtonLabel,
       positiveButtonCallback: () {
-        Navigator.of(context).pop();
         AppSettings.openAppSettings();
       },
     );

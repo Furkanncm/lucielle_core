@@ -40,23 +40,14 @@ class LuciImagePicker implements ILuciImagePicker {
     }
 
     if (Platform.isAndroid) {
-      bool photosOk = await _permissionManager.checkStatus(Permission.photos);
+      final photosOk = await _permissionManager.checkStatus(Permission.photos);
+      final storageOk =
+          await _permissionManager.checkStatus(Permission.storage);
 
-      bool videosOk = true;
-      if (willPickVideo) {
-        videosOk = await _permissionManager.checkStatus(Permission.videos);
-      }
-
-      if (!photosOk || (willPickVideo && !videosOk)) {
-        final storageOk =
-            await _permissionManager.checkStatus(Permission.storage);
-        return storageOk || photosOk || videosOk;
-      }
-
-      return photosOk && videosOk;
+      return photosOk || storageOk;
     }
 
-    return true;
+    return false;
   }
 
   @override
