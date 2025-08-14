@@ -37,8 +37,9 @@ final class ImagePickerBottomSheet {
       barrierLabel: barrierLabel,
       barrierColor: barrierColor ?? Colors.black.withValues(alpha: 0.5),
       elevation: elevation ?? 1,
-      shape: shape ??
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape:
+          shape ??
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       clipBehavior: clipBehavior,
       constraints: constraints,
       isScrollControlled: isScrollControlled,
@@ -53,12 +54,15 @@ final class ImagePickerBottomSheet {
       backgroundColor: bottomSheetBackgroundColor ?? Colors.white,
       builder: (sheetContext) {
         return Padding(
-          padding: LuciPadding.horizontalMedium(),
+          padding: const LuciPadding.horizontalMedium(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              LuciText.headlineSmall(StringConstants.changeProfilePhoto.value,
-                  fontWeight: FontWeight.bold),
+              LuciText.labelMedium(
+                StringConstants.changeProfilePhoto.value,
+                fontWeight: FontWeight.bold,
+              ),
+              verticalBox16,
               _BottomSheetButton(
                 imagePicker: imagePicker,
                 label: StringConstants.fromCamera.value,
@@ -111,22 +115,29 @@ final class _BottomSheetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      height: context.height * .07,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-          boxShadow: [BoxShadow(offset: Offset(0, 2), blurRadius: 2)]),
-      child: Row(
-        children: [
-          Icon(icon, color: iconColor, size: 32),
-          LuciText.bodyLarge(label),
-          Spacer(),
-          IconButton(
-              onPressed: () async {
-                final file =
-                    await imagePicker?.pickImage(imageSource: imageSource);
-                onPicked(file);
-              },
-              icon: Icon(Icons.chevron_right_outlined))
-        ],
+        color: Colors.white.withValues(alpha: 0.3),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: InkWell(
+        onTap: () async {
+          final file = await imagePicker?.pickImage(imageSource: imageSource);
+          onPicked(file);
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: iconColor, size: 32),
+            horizontalBox8,
+            LuciText.bodyLarge(label),
+            const Spacer(),
+            const Icon(Icons.chevron_right_outlined, size: 32),
+
+            verticalBox4,
+          ],
+        ),
       ),
     );
   }
