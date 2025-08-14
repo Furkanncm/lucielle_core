@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../common/image_picker/image_picker.dart';
 import '../../lucielle.dart';
 import '../../utils/constants/string_constants.dart';
 
 final class ImagePickerBottomSheet {
- 
-
   ILuciImagePicker? imagePicker;
 
   Future<XFile?> showImagePickerBottomSheet({
     required BuildContext context,
     required Locale locale,
     Color? bottomSheetBackgroundColor,
-    Color? textColor,
+    Color? iconColor,
     Color? buttonBackgroundColor,
     String? barrierLabel,
     double? elevation,
@@ -58,12 +57,14 @@ final class ImagePickerBottomSheet {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              LuciText.headlineSmall(StringConstants.changeProfilePhoto.value,
+                  fontWeight: FontWeight.bold),
               _BottomSheetButton(
                 imagePicker: imagePicker,
                 label: StringConstants.fromCamera.value,
                 imageSource: ImageSource.camera,
-                icon: const Icon(Icons.camera_alt_outlined),
-                textColor: textColor,
+                icon: Icons.camera_alt_outlined,
+                iconColor: iconColor,
                 buttonBackgroundColor: buttonBackgroundColor,
                 onPicked: (file) => Navigator.of(sheetContext).pop(file),
               ),
@@ -72,8 +73,8 @@ final class ImagePickerBottomSheet {
                 imagePicker: imagePicker,
                 label: StringConstants.fromGallery.value,
                 imageSource: ImageSource.gallery,
-                icon: const Icon(Icons.photo_library_outlined),
-                textColor: textColor,
+                icon: Icons.photo_library_outlined,
+                iconColor: iconColor,
                 buttonBackgroundColor: buttonBackgroundColor,
                 onPicked: (file) => Navigator.of(sheetContext).pop(file),
               ),
@@ -94,32 +95,38 @@ final class _BottomSheetButton extends StatelessWidget {
     required this.imageSource,
     required this.icon,
     required this.onPicked,
-    this.textColor,
+    this.iconColor,
     this.buttonBackgroundColor,
   });
 
   final ILuciImagePicker? imagePicker;
-  final Color? textColor;
+  final Color? iconColor;
   final Color? buttonBackgroundColor;
   final String label;
   final ImageSource imageSource;
-  final Icon icon;
+  final IconData icon;
 
   final ValueChanged<XFile?> onPicked;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-          iconColor: textColor, backgroundColor: buttonBackgroundColor),
-      onPressed: () async {
-        final file = await imagePicker?.pickImage(imageSource: imageSource);
-        onPicked(file);
-      },
-      icon: icon,
-      label: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Center(child: LuciText.bodyMedium(label, textColor: textColor)),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+          boxShadow: [BoxShadow(offset: Offset(0, 2), blurRadius: 2)]),
+      child: Row(
+        children: [
+          Icon(icon, color: iconColor, size: 32),
+          LuciText.bodyLarge(label),
+          Spacer(),
+          IconButton(
+              onPressed: () async {
+                final file =
+                    await imagePicker?.pickImage(imageSource: imageSource);
+                onPicked(file);
+              },
+              icon: Icon(Icons.chevron_right_outlined))
+        ],
       ),
     );
   }

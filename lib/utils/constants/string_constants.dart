@@ -26,12 +26,14 @@ enum StringConstants {
   phone("Phone number"),
 
   invalidPhoneNumber("Phone Number is not valid"),
-  
+
   passwordsDoNotMatch("Passwords do not match"),
 
-  fromCamera('From Camera'),
+  fromCamera('Take Photo'),
 
-  fromGallery('From Gallery'),
+  fromGallery('Choose from Gallery'),
+
+  changeProfilePhoto("Change Profile Picture"),
   ;
 
   /// The actual string value associated with the constant.
