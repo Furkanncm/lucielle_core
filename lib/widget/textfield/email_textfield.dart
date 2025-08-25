@@ -31,6 +31,7 @@ class LuciEmailTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.hintText,
     this.labelText,
+    this.initialValue,
     this.maxLength,
     this.suffixIcon,
     this.enabled,
@@ -68,6 +69,8 @@ class LuciEmailTextFormField extends StatelessWidget {
   /// The label displayed above the input.
   final String? labelText;
 
+  final String? initialValue;
+
   /// The maximum number of lines the field can have.
   final int? maxLength;
 
@@ -88,6 +91,7 @@ class LuciEmailTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      initialValue: initialValue,
       validator: Validators.emailValidator,
       onChanged: onChanged,
       textAlign: textAlign ?? TextAlign.left,

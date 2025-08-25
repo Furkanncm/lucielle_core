@@ -18,6 +18,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.hintText,
     this.labelText,
+    this.initialValue,
     this.maxLength,
     this.suffixIcon,
     this.enabled,
@@ -55,6 +56,8 @@ class LuciPhoneTextFormField extends StatelessWidget {
   /// The label displayed above the input.
   final String? labelText;
 
+  final String? initialValue;
+
   /// The maximum number of lines the field can have.
   final int? maxLength;
 
@@ -82,6 +85,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       textInputAction: textInputAction,
       keyboardType: TextInputType.phone,
+      initialValue: initialValue,
       decoration: TextfieldDecoration.phone(
         prefixIcon ?? Icon(Icons.phone_in_talk_outlined),
         hintText,

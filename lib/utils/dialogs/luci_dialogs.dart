@@ -9,6 +9,7 @@ abstract class LuciDialogs {
     required String positiveButtonLabel,
     required String negativeButtonLabel,
     required VoidCallback positiveButtonCallback,
+    IconData? icon,
     Color? dialogBackgroundColor,
     Color? primaryColor,
     bool? barrierDismissible,
@@ -44,7 +45,7 @@ abstract class LuciDialogs {
               ),
             ),
             child: Icon(
-              Icons.question_mark_rounded,
+              icon??Icons.question_mark_rounded,
               color: primaryColor??Colors.blue,
               size: 40,
             ),

@@ -37,6 +37,7 @@ class LuciPasswordTextFormField extends StatefulWidget {
     this.prefixIcon,
     this.hintText,
     this.labelText,
+    this.initialValue,
     this.maxLength,
     this.suffixIcon,
     this.reverseSuffix,
@@ -83,6 +84,9 @@ class LuciPasswordTextFormField extends StatefulWidget {
 
   /// Label shown above the field.
   final String? labelText;
+
+  final String? initialValue;
+
 
   /// Maximum number of characters allowed in the field.
   final int? maxLength;
@@ -137,6 +141,7 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
       autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
       onEditingComplete: widget.onEditingComplete,
       onFieldSubmitted: widget.onFieldSubmitted,
+      initialValue: widget.initialValue,
       textInputAction: widget.textInputAction,
       keyboardType: TextInputType.visiblePassword,
       obscureText: obscureText,
