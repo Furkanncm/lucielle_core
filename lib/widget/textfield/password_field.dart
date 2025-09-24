@@ -47,6 +47,7 @@ class LuciPasswordTextFormField extends StatefulWidget {
     this.isRequiredAtLeast1Lowercase = true,
     this.isRequiredAtLeast1Uppercase = true,
     this.fillColor,
+    this.readOnly=false
   });
 
   /// Controller for the main password input.
@@ -100,6 +101,9 @@ class LuciPasswordTextFormField extends StatefulWidget {
   /// Whether the field is enabled. Default is true.
   final bool? enabled;
 
+  
+final bool readOnly;
+
   /// Focus node to manage focus manually.
   final FocusNode? focusNode;
 
@@ -146,6 +150,7 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
       keyboardType: TextInputType.visiblePassword,
       obscureText: obscureText,
       enabled: widget.enabled,
+      readOnly: widget.readOnly,
       focusNode: widget.focusNode,
       maxLength: widget.maxLength,
       decoration: TextfieldDecoration.password(

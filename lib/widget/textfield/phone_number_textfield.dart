@@ -24,6 +24,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
     this.enabled,
     this.focusNode,
     this.fillColor,
+    this.readOnly=false
   });
 
   /// Controls the text being edited.
@@ -67,6 +68,9 @@ class LuciPhoneTextFormField extends StatelessWidget {
   /// Whether the text field is enabled or disabled.
   final bool? enabled;
 
+  
+final bool readOnly;
+
   /// An optional focus node to control the field's focus state.
   final FocusNode? focusNode;
 
@@ -93,6 +97,7 @@ class LuciPhoneTextFormField extends StatelessWidget {
         suffixIcon,
       ).copyWith(filled: true, fillColor: fillColor ?? Colors.white),
       enabled: enabled,
+      readOnly: readOnly,
       focusNode: focusNode,
       maxLines: maxLength ?? 1,
       inputFormatters: [PhoneNumberFormatter(), LengthLimitingTextInputFormatter(14)],
