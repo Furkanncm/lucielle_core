@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../lucielle.dart';
 
 abstract class LuciDialogs {
@@ -45,8 +46,8 @@ abstract class LuciDialogs {
               ),
             ),
             child: Icon(
-              icon??Icons.question_mark_rounded,
-              color: primaryColor??Colors.blue,
+              icon ?? Icons.question_mark_rounded,
+              color: primaryColor ?? Colors.blue,
               size: 40,
             ),
           ),
@@ -87,11 +88,83 @@ abstract class LuciDialogs {
                         child: LuciText.bodyMedium(
                           positiveButtonLabel,
                           fontWeight: FontWeight.bold,
-                          textColor: dialogBackgroundColor ?? Colors.white,
+                          textColor:
+                              dialogBackgroundColor?.withValues(alpha: 0.5) ??
+                                  Colors.white,
                         ),
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static Future<void> infoDialog({
+    required BuildContext context,
+    required String title,
+    required String content,
+    required String label,
+    Color? dialogBackgroundColor,
+    Color? primaryColor,
+    bool? barrierDismissible,
+    Color? barrierColor,
+    String? barrierLabel,
+    bool useSafeArea = true,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+    Offset? anchorPoint,
+    TraversalEdgeBehavior? traversalEdgeBehavior,
+  }) async {
+    return showAdaptiveDialog(
+      context: context,
+      barrierColor: barrierColor,
+      useSafeArea: useSafeArea,
+      useRootNavigator: useRootNavigator,
+      routeSettings: routeSettings,
+      anchorPoint: anchorPoint,
+      traversalEdgeBehavior: traversalEdgeBehavior,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog.adaptive(
+          icon: Container(
+            width: 75,
+            height: 75,
+            decoration: BoxDecoration(
+              color: dialogBackgroundColor ?? Colors.white,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: primaryColor ?? Colors.blue,
+                width: 4,
+              ),
+            ),
+            child: Icon(
+              Icons.info_outline_rounded,
+              color: primaryColor ?? Colors.blue,
+              size: 40,
+            ),
+          ),
+          title: LuciText.titleMedium(title, fontWeight: FontWeight.bold),
+          content: LuciText.bodyMedium(content),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            Center(
+              child: SizedBox(
+                width: context.width * 0.8,
+                child: LuciOutlinedButton(
+                  borderColor: primaryColor ?? Colors.blue,
+                  borderSide: BorderSide(color: primaryColor ?? Colors.black),
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: LuciText.bodyMedium(
+                    label,
+                    fontWeight: FontWeight.bold,
+                    textColor: dialogBackgroundColor?.withValues(alpha: 0.5) ??
+                        Colors.white,
+                  ),
                 ),
               ),
             ),
