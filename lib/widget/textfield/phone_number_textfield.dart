@@ -85,7 +85,7 @@ final bool readOnly;
       validator: Validators.phoneNumberValidator,
       onChanged: onChanged,
       textAlign: textAlign ?? TextAlign.left,
-      autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
+      autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
       onEditingComplete: onEditingComplete,
       textInputAction: textInputAction,
       keyboardType: TextInputType.phone,

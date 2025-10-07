@@ -142,7 +142,7 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
           ),
       onChanged: widget.onChanged,
       textAlign: widget.textAlign ?? TextAlign.left,
-      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
+      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
       onEditingComplete: widget.onEditingComplete,
       onFieldSubmitted: widget.onFieldSubmitted,
       initialValue: widget.initialValue,
@@ -161,8 +161,8 @@ class _LuciPasswordTextFormFieldState extends State<LuciPasswordTextFormField> {
           onPressed: () => setState(() => obscureText = !obscureText),
           icon: Icon(
             obscureText
-                ? (widget.suffixIcon ?? Icons.visibility_off_outlined)
-                : (widget.reverseSuffix ?? Icons.visibility_outlined),
+                ? (widget.suffixIcon ?? Icons.visibility_outlined)
+                : (widget.reverseSuffix ?? Icons.visibility_off_outlined),
           ),
         ),
       ).copyWith(

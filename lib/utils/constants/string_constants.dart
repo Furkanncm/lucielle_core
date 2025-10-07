@@ -6,10 +6,10 @@
 /// and helps centralize localization or string management.
 enum StringConstants {
   /// Error message shown when the email field is left empty.
-  emailValueCantBeNull("Email value is can not be null"),
+  emailValueCantBeNull("Email can not be null"),
 
   /// Error message shown when the password field is left empty.
-  passwordCantBeNull("Password is can not be null"),
+  passwordCantBeNull("Password can not be null"),
 
   /// Error message shown when the entered email is not valid.
   invalidEmail("Email is not valid"),
