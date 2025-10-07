@@ -89,8 +89,7 @@ abstract class LuciDialogs {
                           positiveButtonLabel,
                           fontWeight: FontWeight.bold,
                           textColor:
-                              dialogBackgroundColor?.withValues(alpha: 0.5) ??
-                                  Colors.white,
+                              dialogBackgroundColor ?? Colors.white,
                         ),
                       ),
                     ),
@@ -131,6 +130,7 @@ abstract class LuciDialogs {
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog.adaptive(
+          backgroundColor: dialogBackgroundColor,
           icon: Container(
             width: 75,
             height: 75,
@@ -156,13 +156,14 @@ abstract class LuciDialogs {
               child: SizedBox(
                 width: context.width * 0.8,
                 child: LuciOutlinedButton(
+                   backgroundColor: primaryColor ?? Colors.blue,
                   borderColor: primaryColor ?? Colors.blue,
                   borderSide: BorderSide(color: primaryColor ?? Colors.black),
                   onPressed: () => Navigator.of(context).pop(),
                   child: LuciText.bodyMedium(
                     label,
                     fontWeight: FontWeight.bold,
-                    textColor: dialogBackgroundColor?.withValues(alpha: 0.5) ??
+                    textColor: dialogBackgroundColor ??
                         Colors.white,
                   ),
                 ),
